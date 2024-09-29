@@ -20,7 +20,14 @@ window.onload = function() {
 
     // Function to generate the barcode using JsBarcode
     function generateBarcode(number) {
-        JsBarcode("#barcodeCanvas", number, {
+        const canvas = document.getElementById("barcodeCanvas");
+        
+        // Clear the canvas
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear existing barcode
+
+        // Generate the barcode
+        JsBarcode(canvas, number, {
             format: "CODE128",
             lineColor: "#000",
             width: 2.5,  // Adjust the bar width to fit 560 pixels wide
@@ -30,9 +37,8 @@ window.onload = function() {
         });
 
         // Set the canvas width to exactly 560 pixels
-        const canvas = document.getElementById("barcodeCanvas");
         canvas.style.width = "560px";
-        canvas.style.height = "95px"; // Maintain proportional height
+        canvas.style.height = "auto"; // Maintain proportional height
     }
 
     // Generate the first barcode
