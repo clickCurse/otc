@@ -18,8 +18,9 @@ body {
     top: 230px;
     left: 210px;
     height: 100px;
-    width: 560px;
+    width: auto;
     z-index: 1;
+    background-color: white; /* To check if the canvas is visible */
 }
 
 .overlay {
