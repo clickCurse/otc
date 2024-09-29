@@ -16,27 +16,32 @@ window.onload = function() {
         '63681143237707254', '63681143237707502'
     ];
 
-    let currentIndex = 0; // Initialize current index
+    let currentIndex = 0; // Initialize the current index to track the displayed barcode
 
     // Function to generate the barcode using JsBarcode
     function generateBarcode(number) {
         JsBarcode("#barcodeCanvas", number, {
             format: "CODE128",
             lineColor: "#000",
-            width: 4,  // Increase this to make the bars wider (default is 2)
-            height: 150, // Increase this to make the barcode taller (default is 100)
+            width: 2.5,  // Adjust the bar width to fit 560 pixels wide
+            height: 150, // Barcode height
             displayValue: true,  // Show the number below the barcode
-            fontSize: 18 // Increase font size for the number (if it's too small)
+            fontSize: 18 // Adjust the font size for the barcode number
         });
+
+        // Set the canvas width to exactly 560 pixels
+        const canvas = document.getElementById("barcodeCanvas");
+        canvas.style.width = "560px";
+        canvas.style.height = "95px"; // Maintain proportional height
     }
 
     // Generate the first barcode
     generateBarcode(barcodeNumbers[currentIndex]);
 
-    // Add a click event listener to the canvas to generate the next barcode on click
+    // Add a click event listener to the canvas to cycle through the barcodes on tap
     document.getElementById("barcodeCanvas").addEventListener('click', function() {
         // Increment the index to show the next barcode
-        currentIndex = (currentIndex + 1) % barcodeNumbers.length; // Loop back to start when reaching the end
+        currentIndex = (currentIndex + 1) % barcodeNumbers.length; // Loop back to the start if at the end
         generateBarcode(barcodeNumbers[currentIndex]);
     });
 };
