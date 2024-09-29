@@ -38,7 +38,7 @@ window.onload = function() {
             JsBarcode("#barcodeCanvas", number, {
                 format: "CODE128",
                 lineColor: "#000",
-                width: 2,
+                width: 560,
                 height: 100,
                 displayValue: true
             });
