@@ -1,8 +1,6 @@
 window.onload = function() {
     // List of numbers for which you want to generate barcodes
-    const barcodeNumbers = ['63681143237707254',
-'63681143237707361',
-'63681143237707478',
+    const barcodeNumbers = ['63681143237707254','63681143237707361','63681143237707478',
 '63681143237707726',
 '63681143237707361',
 '63681143237707478',
@@ -59,9 +57,9 @@ window.onload = function() {
         JsBarcode("#barcodeCanvas", number, {
             format: "CODE128",
             lineColor: "#000",
-            width: 2,    // Adjust width for barcode bars
+            width: 560,    // Adjust width for barcode bars
             height: 100, // Set height to match your fixed height
-            displayValue: true  // Whether to display the number below the barcode
+            displayValue: false  // Whether to display the number below the barcode
         });
     }
 };
