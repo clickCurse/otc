@@ -1,74 +1,67 @@
-const barcodes = [
-    './images/upc/Barcode (1).asp',
-'./images/upc/Barcode (2).asp',
-'./images/upc/Barcode (3).asp',
-'./images/upc/Barcode (4).asp',
-'./images/upc/Barcode (5).asp',
-'./images/upc/Barcode (6).asp',
-'./images/upc/Barcode (7).asp',
-'./images/upc/Barcode (8).asp',
-'./images/upc/Barcode (9).asp',
-'./images/upc/Barcode (10).asp',
-'./images/upc/Barcode (11).asp',
-'./images/upc/Barcode (12).asp',
-'./images/upc/Barcode (13).asp',
-'./images/upc/Barcode (14).asp',
-'./images/upc/Barcode (15).asp',
-'./images/upc/Barcode (16).asp',
-'./images/upc/Barcode (17).asp',
-'./images/upc/Barcode (18).asp',
-'./images/upc/Barcode (19).asp',
-'./images/upc/Barcode (20).asp',
-'./images/upc/Barcode (21).asp',
-'./images/upc/Barcode (22).asp',
-'./images/upc/Barcode (23).asp',
-'./images/upc/Barcode (24).asp',
-'./images/upc/Barcode (25).asp',
-'./images/upc/Barcode (26).asp',
-'./images/upc/Barcode (27).asp',
-'./images/upc/Barcode (28).asp',
-'./images/upc/Barcode (29).asp',
-'./images/upc/Barcode (30).asp',
-'./images/upc/Barcode (31).asp',
-'./images/upc/Barcode (32).asp',
-'./images/upc/Barcode (33).asp',
-'./images/upc/Barcode (34).asp',
-'./images/upc/Barcode (35).asp',
-'./images/upc/Barcode (36).asp',
-'./images/upc/Barcode (37).asp',
-'./images/upc/Barcode (38).asp',
-'./images/upc/Barcode (39).asp',
-'./images/upc/Barcode (40).asp',
-'./images/upc/Barcode (41).asp',
-'./images/upc/Barcode (42).asp',
-'./images/upc/Barcode (43).asp',
-'./images/upc/Barcode (44).asp',
-'./images/upc/Barcode (45).asp',
-'./images/upc/Barcode (46).asp',
-'./images/upc/Barcode (47).asp',
-'./images/upc/Barcode (48).asp',
-'./images/upc/Bar1.asp',
-'./images/upc/Bar2.asp',
-'./images/upc/Bar3.asp',
-'./images/upc/Bar4.asp',
-'./images/upc/Bar5.asp',
-'./images/upc/Bar6.asp',
-    // Add more barcode paths as needed
-];
+window.onload = function() {
+    // List of numbers for which you want to generate barcodes
+    const barcodeNumbers = ['63681143237707254',
+'63681143237707361',
+'63681143237707478',
+'63681143237707726',
+'63681143237707361',
+'63681143237707478',
+'63681143237707254',
+'63681143237707478',
+'63681143237707502',
+'63681143237707361',
+'63681143237707478',
+'63681143237707726',
+'63681143237707478',
+'63681143237707478',
+'63681143237707726',
+'63681143237707254',
+'63681143237707833',
+'63681143237707361',
+'63681143237707254',
+'63681143237707833',
+'63681143237707726',
+'63681143237707254',
+'63681143237707478',
+'63681143237707833',
+'63681143237707726',
+'63681143237707502',
+'63681143237707833',
+'63681143237707502',
+'63681143237707833',
+'63681143237707254',
+'63681143237707361',
+'63681143237707726',
+'63681143237707726',
+'63681143237707361',
+'63681143237707254',
+'63681143237707833',
+'63681143237707502',
+'63681143237707726',
+'63681143237707254',
+'63681143237707254',
+'63681143237707254',
+'63681143237707726',
+'63681143237707478',
+'63681143237707478',
+'63681143237707726',
+'63681143237707478',
+'63681143237707726',
+'63681143237707478',
+'63681143237707254',
+'63681143237707502',];
 
-let currentIndex = 0;
+    // Generate the first barcode
+    generateBarcode(barcodeNumbers[0]);
 
-const barcodeImage = document.getElementById('barcode');
-
-// Ensure the barcode image is loaded before adding the event listener
-barcodeImage.onload = function() {
-    barcodeImage.addEventListener('click', updateBarcode);
+    // Function to generate the barcode using JsBarcode
+    function generateBarcode(number) {
+        JsBarcode("#barcodeCanvas", number, {
+            format: "CODE128",
+            lineColor: "#000",
+            width: 2,    // Adjust width for barcode bars
+            height: 100, // Set height to match your fixed height
+            displayValue: true  // Whether to display the number below the barcode
+        });
+    }
 };
-
-function updateBarcode() {
-    currentIndex = (currentIndex + 1) % barcodes.length; // Cycle through barcodes
-    barcodeImage.src = barcodes[currentIndex];
-}
-
-// Initial load
-barcodeImage.src = barcodes[currentIndex];

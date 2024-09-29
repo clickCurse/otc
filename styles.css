@@ -9,25 +9,25 @@ body {
 
 .container {
     position: relative;
-    width: 1024px;  /* Width of the overlay */
-    height: 768px;  /* Height of the overlay */
+    width: 1024px;
+    height: 768px;
 }
 
-#barcode {
-    position: absolute; /* Ensure it aligns with the overlay */
-    top: 230px; /* Adjust based on transparency space */
-    left: 210px; /* Adjust based on transparency space */
-    height: 100px; /* Fixed height for the barcode */
-    width: auto; /* Allow width to adjust automatically */
-    z-index: 1; /* Set a lower z-index */
+#barcodeCanvas {
+    position: absolute;
+    top: 230px;
+    left: 210px;
+    height: 100px;
+    width: auto;
+    z-index: 1;
 }
 
 .overlay {
-    position: absolute; /* Ensure it layers over the barcode */
-    top: 0; /* Align it correctly */
-    left: 0; /* Align it correctly */
-    width: 1024px; /* Match the size to the overlay */
-    height: 768px; /* Match the size to the overlay */
-    z-index: 2; /* Set a higher z-index */
-    pointer-events: none; /* Ensure clicks go through to the barcode */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1024px;
+    height: 768px;
+    z-index: 2;
+    pointer-events: none;
 }
