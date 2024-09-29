@@ -38,9 +38,9 @@ window.onload = function() {
             JsBarcode("#barcodeCanvas", number, {
                 format: "CODE128",
                 lineColor: "#000",
-                width: 1120,
+                width: 5060,
                 height: 100,
-                displayValue: true
+                displayValue: false
             });
             console.log("Barcode generated for:", number);
         } catch (error) {
