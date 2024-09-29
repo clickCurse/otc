@@ -49,7 +49,7 @@ window.onload = function() {
 '63681143237707726',
 '63681143237707478',
 '63681143237707254',
-'63681143237707502',];
+'63681143237707502'];
 
     // Generate the first barcode
     generateBarcode(barcodeNumbers[0]);
