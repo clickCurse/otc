@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    position: relative;
+    width: 1024px;  /* Width of the overlay */
+    height: 768px;  /* Height of the overlay */
+}
+
+#barcode {
+    position: absolute; /* Ensure it aligns with the overlay */
+    top: 230px; /* Adjust based on transparency space */
+    left: 210px; /* Adjust based on transparency space */
+    height: 100px; /* Fixed height for the barcode */
+    width: auto; /* Allow width to adjust automatically */
+    z-index: 1; /* Set a lower z-index */
+}
+
+.overlay {
+    position: absolute; /* Ensure it layers over the barcode */
+    top: 0; /* Align it correctly */
+    left: 0; /* Align it correctly */
+    width: 1024px; /* Match the size to the overlay */
+    height: 768px; /* Match the size to the overlay */
+    z-index: 2; /* Set a higher z-index */
+    pointer-events: none; /* Ensure clicks go through to the barcode */
+}
