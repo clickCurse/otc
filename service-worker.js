@@ -1,76 +1,52 @@
-self.addEventListener('install', (event) => {
-    event.waitUntil(
-        caches.open('v1').then((cache) => {
-            return cache.addAll([
-                'index.html',
-                'styles.css',
-                'script.js',
-                './images/upc/Barcode (1).asp',
-'./images/upc/Barcode (2).asp',
-'./images/upc/Barcode (3).asp',
-'./images/upc/Barcode (4).asp',
-'./images/upc/Barcode (5).asp',
-'./images/upc/Barcode (6).asp',
-'./images/upc/Barcode (7).asp',
-'./images/upc/Barcode (8).asp',
-'./images/upc/Barcode (9).asp',
-'./images/upc/Barcode (10).asp',
-'./images/upc/Barcode (11).asp',
-'./images/upc/Barcode (12).asp',
-'./images/upc/Barcode (13).asp',
-'./images/upc/Barcode (14).asp',
-'./images/upc/Barcode (15).asp',
-'./images/upc/Barcode (16).asp',
-'./images/upc/Barcode (17).asp',
-'./images/upc/Barcode (18).asp',
-'./images/upc/Barcode (19).asp',
-'./images/upc/Barcode (20).asp',
-'./images/upc/Barcode (21).asp',
-'./images/upc/Barcode (22).asp',
-'./images/upc/Barcode (23).asp',
-'./images/upc/Barcode (24).asp',
-'./images/upc/Barcode (25).asp',
-'./images/upc/Barcode (26).asp',
-'./images/upc/Barcode (27).asp',
-'./images/upc/Barcode (28).asp',
-'./images/upc/Barcode (29).asp',
-'./images/upc/Barcode (30).asp',
-'./images/upc/Barcode (31).asp',
-'./images/upc/Barcode (32).asp',
-'./images/upc/Barcode (33).asp',
-'./images/upc/Barcode (34).asp',
-'./images/upc/Barcode (35).asp',
-'./images/upc/Barcode (36).asp',
-'./images/upc/Barcode (37).asp',
-'./images/upc/Barcode (38).asp',
-'./images/upc/Barcode (39).asp',
-'./images/upc/Barcode (40).asp',
-'./images/upc/Barcode (41).asp',
-'./images/upc/Barcode (42).asp',
-'./images/upc/Barcode (43).asp',
-'./images/upc/Barcode (44).asp',
-'./images/upc/Barcode (45).asp',
-'./images/upc/Barcode (46).asp',
-'./images/upc/Barcode (47).asp',
-'./images/upc/Barcode (48).asp',
-'./images/upc/Bar1.asp',
-'./images/upc/Bar2.asp',
-'./images/upc/Bar3.asp',
-'./images/upc/Bar4.asp',
-'./images/upc/Bar5.asp',
-'./images/upc/Bar6.asp',
-'./images/overlay.png',
-                'icon-192x192.png',
-                'icon-512x512.png'
-            ]);
-        })
-    );
+const CACHE_NAME = 'barcode-viewer-cache-v1';
+const urlsToCache = [
+  '/',
+  '/index.html',
+  '/styles.css',
+  '/script.js',
+  '/manifest.json',
+  '/images/overlay.png',
+  '/images/icons/icon-192x192.png',
+  '/images/icons/icon-512x512.png'
+];
+
+// Install event - caching assets
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache);
+      })
+  );
 });
 
-self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        caches.match(event.request).then((response) => {
-            return response || fetch(event.request);
+// Activate event - cleanup old caches
+self.addEventListener('activate', function(event) {
+  const cacheWhitelist = [CACHE_NAME];
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
         })
-    );
+      );
+    })
+  );
+});
+
+// Fetch event - serve cached assets if offline
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        // Cache hit - return the response from cache
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      })
+  );
 });
