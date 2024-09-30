@@ -5094,10 +5094,9 @@ window.onload = function() {
     // Generate the first barcode
     generateBarcode(barcodeNumbers[currentIndex]);
 
-    // Add a click event listener to the canvas to cycle through the barcodes on tap
-    document.getElementById("barcodeCanvas").addEventListener('click', function() {
-        // Increment the index to show the next barcode
+    // Set an interval to change the barcode every 500 milliseconds (2 times per second)
+    setInterval(function() {
         currentIndex = (currentIndex + 1) % barcodeNumbers.length; // Loop back to the start if at the end
         generateBarcode(barcodeNumbers[currentIndex]);
-    });
+    }, 500); // 500 milliseconds
 };
