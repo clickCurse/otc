@@ -5092,11 +5092,24 @@ window.onload = function() {
     }
 
     // Generate the first barcode
-    generateBarcode(barcodeNumbers[currentIndex]);
+        generateBarcode(barcodeNumbers[currentIndex]);
 
-    // Set an interval to change the barcode every 500 milliseconds (2 times per second)
-    setInterval(function() {
+    // Function to change barcode on click/tap or interval
+    function changeBarcode() {
         currentIndex = (currentIndex + 1) % barcodeNumbers.length; // Loop back to the start if at the end
         generateBarcode(barcodeNumbers[currentIndex]);
-    }, 500); // 500 milliseconds
+    }
+
+    // Set an interval to change the barcode every 2 seconds
+    const intervalId = setInterval(changeBarcode, 2000); // 2000 milliseconds = 2 seconds
+
+    // Add an event listener for click/tap events to change the barcode immediately
+    canvas.addEventListener('click', function() {
+        changeBarcode(); // Change barcode when clicked
+    });
+
+    // Add support for touch events (for mobile)
+    canvas.addEventListener('touchstart', function() {
+        changeBarcode(); // Change barcode on touch
+    });
 };
